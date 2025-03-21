@@ -8,11 +8,11 @@ local char_count = 0
 local typing_speed = 0
 
 local function update_typing_speed()
-    local current_time = vim.fn.reltimefloat(vim.fn.reltime(start_time))
+    local current_time = vim.fn.reltime(vim.fn.reltime(start_time))
     -- caculate the word per min(WPM) 
     local words_per_minute = (char_count / 5) / (current_time / 60)
     typing_speed = math.floor(words_per_minute)
-    vim.cmd('let &statusline="%{v:lua.require(\'typing-speed\').get_typing_speed()}"')
+    vim.opt.statusline('let &statusline="%{v:lua.require(\'typing-speed\').get_typing_speed()}"')
 end
 
 function M.get_typing_speed()
